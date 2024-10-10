@@ -1,0 +1,8 @@
+name: MiniPlaceholders-Statistic
+author: NotAlexNoyle
+description: A fork of Statistics-Expansion for MiniPlaceholders.
+website: https://github.com/true-og/MiniPlaceholders-Statistic
+version: '${version}'
+api-version: '${apiVersion}'
+main: net.trueog.miniplaceholders.statistics.StatisticExpansion
+depend: [Utilities-OG]
