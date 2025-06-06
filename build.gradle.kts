@@ -1,5 +1,5 @@
 plugins {
-    id("com.gradleup.shadow") version "8.3.5" // Import shadow API.
+    id("com.gradleup.shadow") version "8.3.6" // Import shadow API.
     java // Tell gradle this is a java project.
     eclipse // Import eclipse plugin for IDE integration.
     kotlin("jvm") version "2.1.21" // Import kotlin jvm plugin for kotlin/java integration.
@@ -25,6 +25,9 @@ tasks.named<ProcessResources>("processResources") {
     filesMatching("plugin.yml") {
         expand(props)
     }
+    from("LICENSE") { // Bundle license into .jars.
+        into("/")
+    }
 }
 
 repositories {
@@ -38,21 +41,17 @@ repositories {
 dependencies {
     compileOnly("org.purpurmc.purpur:purpur-api:1.19.4-R0.1-SNAPSHOT") // Declare purpur API version to be packaged.
     compileOnly("io.github.miniplaceholders:miniplaceholders-api:2.2.3") // Import MiniPlaceholders API.
-
-    implementation(project(":libs:Utilities-OG"))
+    compileOnly(project(":libs:Utilities-OG"))
 }
 
-tasks.withType<AbstractArchiveTask>().configureEach { // Ensure reproducible builds.
+tasks.withType<AbstractArchiveTask>().configureEach { // Ensure reproducible .jars
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
 }
 
 tasks.shadowJar {
-    archiveClassifier.set("") // Use empty string instead of null
-    from("LICENSE") {
-        into("/")
-    }
     exclude("io.github.miniplaceholders.*") // Exclude the MiniPlaceholders package from being shadowed.
+    archiveClassifier.set("") // Use empty string instead of null.
     minimize()
 }
 
