@@ -24,16 +24,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class StatisticExpansion extends JavaPlugin {
 
-	@Override
-	public void onEnable() {
+    @Override
+    public void onEnable() {
 
-		saveDefaultConfig();
+        saveDefaultConfig();
 
-		// Register the MiniPlaceholders.
-		new StatisticsPlaceholders();
+        // Register the MiniPlaceholders.
+        new StatisticsPlaceholders();
 
-		getLogger().info(getName() + " v." + getPluginMeta().getVersion() + " has been enabled!");
-
-	}
-
+        getLogger().info(getName() + " v." + getPluginMeta().getVersion() + " has been enabled!");
+    }
 }
